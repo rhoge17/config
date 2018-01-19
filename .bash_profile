@@ -1,5 +1,5 @@
 
-# Rick's bash_profile (edited on MB12)
+# Rick's bash_profile (edited on MBP)
 
 echo "Running .bash_profile..."
 

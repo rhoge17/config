@@ -66,6 +66,9 @@
 (setq mu4e-trash-folder "/McGill/Deleted Items")
 (setq mu4e-refile-folder "/McGill/Archive")
 
+; behaviours
+(setq mu4e-sent-messages-behavior 'sent)
+
 ; settings to speed up re-index
 (setq
   mu4e-index-cleanup nil      ;; don't do a full cleanup check
@@ -99,3 +102,13 @@
       smtpmail-smtp-service 587)
 (setq mu4e-compose-signature
    "\nmu4e")
+
+;; Keyboard Shortcuts
+(setq mu4e-maildir-shortcuts
+  '( ("/McGill/Inbox"         . ?i)
+     ("/McGill/Archive"       . ?a)
+     ("/McGill/Deleted Items" . ?t)
+     ("/McGill/Sent Items"    . ?s)))
+
+;; To deal with Office 365 Trash issues, search for "dtrash" in mu4e-mark.el
+;; (mu4e~mark-check-target target) "+T-N")) and remove the "+T"

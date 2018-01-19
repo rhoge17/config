@@ -22,6 +22,6 @@ Slave :McGill-local:
 Patterns "INBOX" "Other" "Archive" "Drafts" "Deleted Items" "Sent" "Sent Items"
 # Automatically create missing mailboxes, both locally and on the server
 Create Both
-#Expunge Both
+Expunge Both
 # Save the synchronization state files in the relevant directory
 SyncState *

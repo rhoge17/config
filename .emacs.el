@@ -98,4 +98,4 @@
       user-full-name  "Rick Hoge"
       smtpmail-smtp-service 587)
 (setq mu4e-compose-signature
-   "\nsent using mu4e")
+   "\nmu4e")

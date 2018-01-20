@@ -31,6 +31,7 @@ export PATH=$PATH:/usr/X/bin # X Windows
 export PATH=$PATH:/usr/local/afni # afni
 export PATH=$PATH:$HOME/Library/Python/2.7/bin
 #export PATH="$(brew --prefix coreutils)/libexec/gnubin:$PATH"
+export PATH="$HOME/.cask/bin:$PATH"
 
 # aliases
 alias nl2='NeuroLens2'

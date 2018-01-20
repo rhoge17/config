@@ -1,5 +1,12 @@
 
 ;; default font
+
+;; Added by Package.el.  This must come before configurations of
+;; installed packages.  Don't delete this line.  If you don't want it,
+;; just comment it out by adding a semicolon to the start of the line.
+;; You may delete these explanatory comments.
+(package-initialize)
+
 (set-default-font "Andale Mono 18")
 
 ;; color-theme stuff
@@ -47,7 +54,7 @@
 
 ; tell mu4e how to sync email
 (setq mu4e-get-mail-command "/usr/local/bin/mbsync -a")
-(setq mu4e-update-interval 60) ;; Check every minute
+(setq mu4e-update-interval 300) ;; Update interval in seconds
 
 ; to avoid duplicate UID errors
 (setq mu4e-change-filenames-when-moving t)
@@ -117,3 +124,37 @@
 
 ;; To deal with Office 365 Trash issues, search for "dtrash" in mu4e-mark.el
 ;; (mu4e~mark-check-target target) "+T-N")) and remove the "+T"
+
+;; cask
+
+(require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
+(cask-initialize)
+
+(require 'use-package "/Users/rhoge/Downloads/use-package-master/use-package.el")
+
+(require 'prodigy "/Users/rhoge/Downloads/prodigy.el-master/prodigy.el")
+
+(use-package prodigy
+  :ensure t
+  :init (prodigy-define-tag
+          :name 'email
+          :ready-message "Checking Email using IMAP IDLE. Ctrl-C to shutdown.")
+  (prodigy-define-service
+    :name "imapnotify"
+    :command "imapnotify"
+    :args (list "-c" (expand-file-name ".shared_config_files/imapnotify.mcgill.js" (getenv "HOME")))
+    :tags '(email)
+    :kill-signal 'sigkill))
+
+(custom-set-variables
+ ;; custom-set-variables was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ '(package-selected-packages (quote (prodigy))))
+(custom-set-faces
+ ;; custom-set-faces was added by Custom.
+ ;; If you edit it by hand, you could mess it up, so be careful.
+ ;; Your init file should contain only one such instance.
+ ;; If there is more than one, they won't work right.
+ )

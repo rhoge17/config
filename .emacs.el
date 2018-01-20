@@ -47,7 +47,7 @@
 
 ; tell mu4e how to sync email
 (setq mu4e-get-mail-command "/usr/local/bin/mbsync -a")
-(setq mu4e-update-interval 300) ;; Check every five minutes
+(setq mu4e-update-interval 60) ;; Check every minute
 
 ; to avoid duplicate UID errors
 (setq mu4e-change-filenames-when-moving t)
@@ -66,8 +66,13 @@
 (setq mu4e-trash-folder "/McGill/Deleted Items")
 (setq mu4e-refile-folder "/McGill/Archive")
 
-; behaviours
+(add-to-list 'mu4e-user-mail-address-list "rick.hoge@mcgill.ca") 
+
+;; various behaviours
 (setq mu4e-sent-messages-behavior 'sent)
+(setq mu4e-headers-show-threads nil)
+(setq mu4e-compose-keep-self-cc nil)
+(setq mu4e-compose-dont-reply-to-self t)
 
 ; settings to speed up re-index
 (setq

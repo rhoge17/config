@@ -35,7 +35,7 @@ export PATH="$HOME/.cask/bin:$PATH"
 alias nl2='NeuroLens2'
 alias ls='ls -FG'
 alias rm='rm -i'
-alias pu='rm -i *# *~ .*~ .*#'
+alias pu='rm -i *\# *~ .*~ .*#'
 alias cvs1='export CVSROOT=/Users/rhoge/cvs'
 alias cvs2='export CVSROOT=:ext:rhoge@gate.nmr.mgh.harvard.edu:/homes/5/rhoge/cvsroot'
 alias xfer='sshfs -C rhoge@login.bic.mni.mcgill.ca:/data/transfer/ /Users/rhoge/sshfs/'

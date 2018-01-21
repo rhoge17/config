@@ -53,8 +53,8 @@
 (setq mu4e-maildir "/Users/rhoge/mail")
 
 ; tell mu4e how to sync email
-(setq mu4e-get-mail-command "/usr/local/bin/mbsync -a")
-(setq mu4e-update-interval 300) ;; Update interval in seconds
+(setq mu4e-get-mail-command "/usr/local/bin/mbsync -a -q")
+(setq mu4e-update-interval nil) ;; Update interval in seconds (nil for no update)
 
 ; to avoid duplicate UID errors
 (setq mu4e-change-filenames-when-moving t)
@@ -130,7 +130,8 @@
 (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
 (cask-initialize)
 
-(require 'use-package "/Users/rhoge/Downloads/use-package-master/use-package.el")
+;;(require 'use-package "/Users/rhoge/Downloads/use-package-master/use-package.el")
+(require 'use-package "/usr/local/share/emacs/site-lisp/use-package/use-package.el")
 
 (require 'prodigy "/Users/rhoge/Downloads/prodigy.el-master/prodigy.el")
 

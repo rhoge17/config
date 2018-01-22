@@ -67,9 +67,29 @@
 ; tell mu4e to use w3m for html rendering
 (setq mu4e-html2text-command "/usr/local/bin/w3m -T text/html")
 
-; taken from mu4e page to define bookmarks
-;(add-to-list 'mu4e-bookmarks
-;            '("size:5M..500M"       "Big messages"     ?b))
+;; mu4e bookmarks
+
+(setq mu4e-bookmarks
+      `( ,(make-mu4e-bookmark
+	   :name  "Today"
+	   :query "maildir:/McGill/Inbox AND date:today"
+	   :key ?t)
+	 ,(make-mu4e-bookmark
+	   :name "Yesterday"
+	   :query "maildir:/McGill/Inbox AND date:2d..1d"
+	   :key ?y)
+	 ,(make-mu4e-bookmark
+	   :name "Day before yesterday"
+	   :query "maildir:/McGill/Inbox AND date:3d..2d"
+	   :key ?Y)
+	 ,(make-mu4e-bookmark
+	   :name "Last 7 days"
+	   :query "maildir:/McGill/inbox AND date:7d..now"
+	   :key ?w)
+	 ,(make-mu4e-bookmark
+	   :name "Week before last"
+	   :query "maildir:/McGill/inbox AND date:14d..7d"
+	   :key ?W)))
 
 ; mu4e requires to specify drafts, sent, and trash dirs
 ; a smarter configuration allows to select directories according to the account (see mu4e page)
@@ -182,3 +202,4 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  )
+

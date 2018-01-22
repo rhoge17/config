@@ -50,10 +50,10 @@
 (require 'mu4e)
 
 ; tell mu4e where my Maildir is
-(setq mu4e-maildir "/Users/rhoge/mail")
+(setq mu4e-maildir "/Users/rhoge/Maildir")
 
 ; tell mu4e how to sync email
-(setq mu4e-get-mail-command "/usr/local/bin/mbsync -a -q")
+(setq mu4e-get-mail-command "/usr/local/bin/mbsync -q McGill")
 (setq mu4e-update-interval nil) ;; Update interval in seconds (nil for no update)
 
 ; to avoid duplicate UID errors

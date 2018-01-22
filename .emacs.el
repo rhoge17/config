@@ -34,6 +34,11 @@
 
 ;; automatically open files in correct mode
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
+(add-to-list 'auto-mode-alist '("notes.txt" . shell-script-mode))
+(add-to-list 'auto-mode-alist '(".zshrc" . shell-script-mode))
+(add-to-list 'auto-mode-alist '(".zpreztorc" . shell-script-mode))
+(add-to-list 'auto-mode-alist '(".generic_profile" . shell-script-mode))
+(add-to-list 'auto-mode-alist '(".mbsyncrc" . shell-script-mode))
 
 ;; needed for S-tab to work in org-mode
 (global-set-key [backtab] 'org-shifttab)

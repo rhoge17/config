@@ -1,4 +1,8 @@
 
+Create Both
+Expunge Both
+SyncState *
+
 # Work account
 IMAPAccount McGill
 Host outlook.office365.com
@@ -12,13 +16,68 @@ IMAPStore McGill-remote
 Account McGill
 
 MaildirStore McGill-local
-Path ~/mail/McGill/
-Inbox ~/mail/McGill/Inbox
+Path ~/Maildir/McGill/
+Inbox ~/Maildir/McGill/Inbox
 
-Channel McGill
+# Inbox
+
+Channel McGill-inbox
 Master :McGill-remote:
 Slave :McGill-local:
-Patterns "INBOX" "Other" "Archive" "Drafts" "Deleted Items" "Sent" "Sent Items"
+Patterns "INBOX"
+
+# Archive
+
+Channel McGill-archive
+Master :McGill-remote:"Archive"
+Slave :McGill-local:"Archive"
 Create Both
 Expunge Both
 SyncState *
+
+# Drafts
+
+Channel McGill-drafts
+Master :McGill-remote:"Drafts"
+Slave :McGill-local:"Drafts"
+Create Both
+Expunge Both
+SyncState *
+
+# Deleted Items
+
+Channel McGill-deleteditems
+Master :McGill-remote:"Deleted Items"
+Slave :McGill-local:"Deleted Items"
+Create Both
+Expunge Both
+SyncState *
+
+# Sent
+
+Channel McGill-sent
+Master :McGill-remote:"Sent"
+Slave :McGill-local:"Sent"
+Create Both
+Expunge Both
+SyncState *
+
+# Sent Items
+
+Channel McGill-sentitems
+Master :McGill-remote:"Sent Items"
+Slave :McGill-local:"Sent Items"
+Create Both
+Expunge Both
+SyncState *
+
+# Group
+
+Group McGill
+Channel McGill-inbox
+Channel McGill-archive
+Channel McGill-drafts
+Channel McGill-deleteditems
+Channel McGill-sent
+Channel McGill-sentitems
+

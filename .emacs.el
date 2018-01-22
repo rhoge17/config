@@ -86,6 +86,13 @@
 (setq mu4e-compose-keep-self-cc nil)
 (setq mu4e-compose-dont-reply-to-self t)
 
+;; don't auto-fill (line wrap)
+(defun no-auto-fill ()
+  "Turn off auto-fill-mode."
+  (auto-fill-mode -1))
+
+(add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+
 ; settings to speed up re-index
 (setq
   mu4e-index-cleanup nil      ;; don't do a full cleanup check
@@ -151,6 +158,17 @@
     :args (list "-c" (expand-file-name ".shared_config_files/imapnotify.mcgill.js" (getenv "HOME")))
     :tags '(email)
     :kill-signal 'sigkill))
+
+;; For unfilling paragraphs and regions
+(defun unfill-paragraph ()
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-paragraph nil)))
+
+(defun unfill-region ()
+  (interactive)
+  (let ((fill-column (point-max)))
+    (fill-region (region-beginning) (region-end) nil)))
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

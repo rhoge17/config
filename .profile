@@ -1,11 +1,10 @@
 
-echo "Running .generic_profile..."
+# echo "Running .profile..."
 
 # shell variables
 
 FIGNORE=.aux:.o:.log:\~:\#
 IGNOREEOF=10
-#PS1='\h:\W -> '
 
 # environment variables
 
@@ -15,7 +14,8 @@ export CVSEDITOR='emacs -nw -l ~/.nwemacs'
 export CVSEDITOR='emacs'
 export DISPLAY=:0
 
-export VISUAL=emacs
+EMACS_PATH='/usr/local/bin'
+export VISUAL="$EMACS_PATH/emacsclient -c --alternate-editor=$EMACS_PATH/emacs"
 export EDITOR="$VISUAL"
 
 # minc stuff
@@ -46,14 +46,16 @@ alias slides='cd /Users/rhoge/Documents/Slides'
 alias prisma='cd /Users/rhoge/Documents/Grants/Active/2015-06-01\ BIC\ PRISMA\ CFI'
 alias battery='pmset -g batt'
 alias lp='lp -d HP_Color_LaserJet_3600'
-alias mu4e='emacsclient -e \(mu4e\)'
-alias e='emacsclient -c'
+alias mu4e="$EMACS_PATH/emacsclient -e \(mu4e\) --alternate-editor=$EMACS_PATH/emacs"
+alias e="$EMACS_PATH/emacsclient -c --alternate-editor=$EMACS_PATH/emacs"
+alias e2="$EMACS_PATH/emacsclient --no-wait --alternate-editor=$EMACS_PATH/emacs"
 alias mbs='mbsync -a ; emacsclient -e \(mu4e-update-index\)'
 alias mbsm='mbsync McGill ; emacsclient -e \(mu4e-update-index\)'
 alias mbsi='mbsync McGill-inbox ; emacsclient -e \(mu4e-update-index\)'
 alias mbss='mbsync McGill-sentitems ; emacsclient -e \(mu4e-update-index\)'
 alias mbsd='mbsync McGill-drafts ; emacsclient -e \(mu4e-update-index\)'
 alias mbst='mbsync McGill-deleteditems ; emacsclient -e \(mu4e-update-index\)'
+alias mytest='echo $EDITOR'
 
 # SVN stuff
 export SVN_EDITOR=/usr/bin/emacs

@@ -48,7 +48,12 @@ alias battery='pmset -g batt'
 alias lp='lp -d HP_Color_LaserJet_3600'
 alias mu4e='emacsclient -e \(mu4e\)'
 alias e='emacsclient -c'
-alias mbs='mbsync McGill ; mu index'
+alias mbs='mbsync -a ; emacsclient -e \(mu4e-update-index\)'
+alias mbsm='mbsync McGill ; emacsclient -e \(mu4e-update-index\)'
+alias mbsi='mbsync McGill-inbox ; emacsclient -e \(mu4e-update-index\)'
+alias mbss='mbsync McGill-sentitems ; emacsclient -e \(mu4e-update-index\)'
+alias mbsd='mbsync McGill-drafts ; emacsclient -e \(mu4e-update-index\)'
+alias mbst='mbsync McGill-deleteditems ; emacsclient -e \(mu4e-update-index\)'
 
 # SVN stuff
 export SVN_EDITOR=/usr/bin/emacs

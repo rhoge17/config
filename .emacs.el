@@ -75,20 +75,20 @@
 	   :query "maildir:/McGill/Inbox AND date:today"
 	   :key ?t)
 	 ,(make-mu4e-bookmark
-	   :name "Yesterday"
-	   :query "maildir:/McGill/Inbox AND date:2d..1d"
+	   :name "Since yesterday"
+	   :query "maildir:/McGill/Inbox AND date:2d..now"
 	   :key ?y)
 	 ,(make-mu4e-bookmark
-	   :name "Day before yesterday"
-	   :query "maildir:/McGill/Inbox AND date:3d..2d"
+	   :name "Last three days"
+	   :query "maildir:/McGill/Inbox AND date:3d..now"
 	   :key ?Y)
 	 ,(make-mu4e-bookmark
 	   :name "Last 7 days"
 	   :query "maildir:/McGill/inbox AND date:7d..now"
 	   :key ?w)
 	 ,(make-mu4e-bookmark
-	   :name "Week before last"
-	   :query "maildir:/McGill/inbox AND date:14d..7d"
+	   :name "Last 14 days"
+	   :query "maildir:/McGill/inbox AND date:14d..now"
 	   :key ?W)))
 
 ; mu4e requires to specify drafts, sent, and trash dirs
@@ -107,11 +107,10 @@
 (setq mu4e-compose-dont-reply-to-self t)
 
 ;; don't auto-fill (line wrap)
-(defun no-auto-fill ()
-  "Turn off auto-fill-mode."
-  (auto-fill-mode -1))
-
-(add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
+;; (defun no-auto-fill ()
+;;   "Turn off auto-fill-mode."
+;;   (auto-fill-mode -1))
+;; (add-hook 'mu4e-compose-mode-hook #'no-auto-fill)
 
 ; settings to speed up re-index
 (setq

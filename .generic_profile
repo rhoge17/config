@@ -46,7 +46,8 @@ alias slides='cd /Users/rhoge/Documents/Slides'
 alias prisma='cd /Users/rhoge/Documents/Grants/Active/2015-06-01\ BIC\ PRISMA\ CFI'
 alias battery='pmset -g batt'
 alias lp='lp -d HP_Color_LaserJet_3600'
-alias mu4e='emacs -f mu4e'
+alias mu4e='emacsclient -e \(mu4e\)'
+alias e='emacsclient -c'
 
 # SVN stuff
 export SVN_EDITOR=/usr/bin/emacs

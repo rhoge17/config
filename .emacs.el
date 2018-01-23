@@ -177,7 +177,8 @@
     :command "imapnotify"
     :args (list "-c" (expand-file-name ".shared_config_files/imapnotify.mcgill.js" (getenv "HOME")))
     :tags '(email)
-    :kill-signal 'sigkill))
+    :kill-signal 'sigkill
+    :auto-start t))
 
 ;; For unfilling paragraphs and regions
 (defun unfill-paragraph ()
@@ -189,6 +190,8 @@
   (interactive)
   (let ((fill-column (point-max)))
     (fill-region (region-beginning) (region-end) nil)))
+
+(server-start)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
@@ -203,3 +206,6 @@
  ;; If there is more than one, they won't work right.
  )
 
+(prodigy)
+(prodigy-start)
+(delete-other-windows)

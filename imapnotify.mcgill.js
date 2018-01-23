@@ -10,6 +10,5 @@ exports.port = 993;
 exports.tls = true;
 exports.username = "richard.hoge@mcgill.ca";
 exports.password = "*zryjek1"
-exports.onNewMail = "mbsync -a";
-exports.onNewMailPost = "emacsclient  -e '(mu4e-update-index)'";
+exports.onNewMail = "mbsync -qq McGill-inbox ; emacsclient  -e '(mu4e-update-index)'";
 exports.boxes = [ "Inbox"];

@@ -190,8 +190,6 @@
   (let ((fill-column (point-max)))
     (fill-region (region-beginning) (region-end) nil)))
 
-(server-start)
-
 (custom-set-variables
  ;; custom-set-variables was added by Custom.
  ;; If you edit it by hand, you could mess it up, so be careful.
@@ -205,6 +203,9 @@
  ;; If there is more than one, they won't work right.
  )
 
+
+;; automatically launch emacs server and prodigy/imapnotify
+(server-start)
 (prodigy)
 (prodigy-start)
 (delete-other-windows)

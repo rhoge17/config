@@ -48,6 +48,7 @@ alias battery='pmset -g batt'
 alias lp='lp -d HP_Color_LaserJet_3600'
 alias mu4e='emacsclient -e \(mu4e\)'
 alias e='emacsclient -c'
+alias mbs='mbsync McGill ; mu index'
 
 # SVN stuff
 export SVN_EDITOR=/usr/bin/emacs

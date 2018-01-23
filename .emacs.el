@@ -106,6 +106,9 @@
 (setq mu4e-compose-keep-self-cc nil)
 (setq mu4e-compose-dont-reply-to-self t)
 
+;; the following does not seem to work in 'brew' version
+(setq mu4e-headers-advance-after-mark nil)
+
 ;; don't auto-fill (line wrap)
 ;; (defun no-auto-fill ()
 ;;   "Turn off auto-fill-mode."

@@ -32,7 +32,7 @@ export PATH=$PATH:$HOME/Library/Python/2.7/bin
 export PATH="$HOME/.cask/bin:$PATH"
 
 # aliases
-alias nl2='NeuroLens2'
+alias nl2='open -a NeuroLens2'
 alias ls='ls -FG'
 alias rm='rm -i'
 alias pu='rm -i *\# *~ .*~ .*#'

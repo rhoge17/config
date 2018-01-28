@@ -59,7 +59,7 @@
 
 ; tell mu4e how to sync email
 (setq mu4e-get-mail-command "/usr/local/bin/mbsync -q McGill")
-(setq mu4e-update-interval nil) ;; Update interval in seconds (nil for no update)
+(setq mu4e-update-interval 600) ;; Update interval in seconds (nil for no update)
 
 ; to avoid duplicate UID errors
 (setq mu4e-change-filenames-when-moving t)
@@ -105,10 +105,14 @@
 (setq mu4e-headers-show-threads nil)
 (setq mu4e-compose-keep-self-cc nil)
 (setq mu4e-compose-dont-reply-to-self t)
-;;(setq mu4e-compose-format-flowed t)
+(setq mu4e-compose-format-flowed t)
+(setq mu4e-headers-date-format "%Y-%m-%d %H:%M")
+;;(setq mu4e-view-show-addresses t)
+(setq message-kill-buffer-on-exit t)
 
 ;; the following does not seem to work in 'brew' version
 (setq mu4e-headers-advance-after-mark nil)
+(setq mu4e-compose-in-new-frame t)
 
 ;; don't auto-fill (line wrap)
 ;; (defun no-auto-fill ()
@@ -154,7 +158,7 @@
       user-full-name  "Rick Hoge"
       smtpmail-smtp-service 587)
 (setq mu4e-compose-signature
-   "\nmu4e")
+   "\nRick Hoge\nMcConnell Brain Imaging Centre\nMontreal Neurological Institute\nMcGill University")
 
 ;; Keyboard Shortcuts
 (setq mu4e-maildir-shortcuts
@@ -209,6 +213,18 @@
   (interactive)
   (let ((fill-column (point-max)))
     (fill-region (region-beginning) (region-end) nil)))
+
+;; (setq mu4e-headers-fields
+;;   '( (:human-date    .   12)
+;;      (:flags         .    6)
+;;      (:from          .   22)
+;;      (:subject       .   nil))
+
+(setq mu4e-headers-fields
+      '( (:human-date    .  18)    ;; alternatively, use :human-date
+	 (:flags         .   6)
+	 (:from          .  27)
+	 (:subject       .  nil))) ;; alternatively, use :thread-subject
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

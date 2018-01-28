@@ -1,4 +1,8 @@
 
+########################################################################################
+### Git Repository #####################################################################
+########################################################################################
+
 # Create central repository
 
 git init --bare
@@ -31,5 +35,45 @@ git remote update
 
 git pull
 
+
+
+########################################################################################
+### MU4E SETUP #########################################################################
+########################################################################################
+
+[edit lisp file to fix autoexpunge issue]
+
+########################################################################################
+### ZSH SETUP ##########################################################################
+########################################################################################
+
+zprezto
+
+########################################################################################
+### POSTFIX SETUP ####################################################################
+########################################################################################
+
+sudo cp /System/Library/LaunchDaemonscom.apple.postfix.master.plist /Library/LaunchDaemons/com.apple.postfix.custom.plist
+
+sudo emacs /Library/LaunchDaemons/com.apple.postfix.custom.plist
+[add following lines before <dict>:]
+<key>RunAtLoad</key>
+<true/>
+<key>KeepAlive</key>
+<true/>
+
+sudo emacs /etc/postfix/sasl_passwd
+[add following entry:]
+smtp.office365.com:587 richard.hoge@mcgill.ca:***********
+
+sudo chmod 600 /etc/postfix/sasl_passwd
+sudo postmap /etc/postfix/sasl_passwd
+sudo launchctl stop org.postfix.master
+sudo launchctl start org.postfix.master
+
+sudo emacs /etc/postfix/main.cf
+[see other computers for example]
+
+sudo postfix start
 
 

@@ -105,6 +105,7 @@
 (setq mu4e-headers-show-threads nil)
 (setq mu4e-compose-keep-self-cc nil)
 (setq mu4e-compose-dont-reply-to-self t)
+;;(setq mu4e-compose-format-flowed t)
 
 ;; the following does not seem to work in 'brew' version
 (setq mu4e-headers-advance-after-mark nil)
@@ -128,17 +129,23 @@
 (require 'w3m-load)
 ;(require 'mime-w3m)
 
-; tell message-mode how to send mail
-(require 'smtpmail)
+;; tell message-mode how to send mail
 
-(setq message-send-mail-function 'smtpmail-send-it
-      starttls-use-gnutls t
-      smtpmail-auth-credentials
-      (expand-file-name "~/.authinfo")
-      smtpmail-default-smtp-server "smtp.office365.com"
-      smtpmail-smtp-server "smtp.office365.com"
-      smtpmail-smtp-service 587
-      smtpmail-debug-info t)
+;; This code will use built-in emacs functionality, but mu4e will block during send
+;; (require 'smtpmail)
+;; (setq message-send-mail-function 'smtpmail-send-it
+;;       starttls-use-gnutls t
+;;       smtpmail-auth-credentials
+;;       (expand-file-name "~/.authinfo")
+;;       smtpmail-default-smtp-server "smtp.office365.com"
+;;       smtpmail-smtp-server "smtp.office365.com"
+;;       smtpmail-smtp-service 587
+;;       smtpmail-debug-info t)
+
+
+;; send mail using postfix - sends in background but requires setup outside emacs
+(setq send-mail-function 'sendmail-send-it)
+(setq message-send-mail-function 'message-send-mail-with-sendmail)
 
 ;; general emacs mail settings; used when composing e-mail
 ;; the non-mu4e-* stuff is inherited from emacs/message-mode

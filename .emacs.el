@@ -166,6 +166,16 @@
 ;; To deal with Office 365 Trash issues, search for "dtrash" in mu4e-mark.el
 ;; (mu4e~mark-check-target target) "+T-N")) and remove the "+T"
 
+(require 'mu4e-contrib) 
+(setq mu4e-html2text-command 'mu4e-shr2text) 
+
+;; Composition preferences
+(add-hook 'mu4e-compose-mode-hook
+	  (defun my-do-compose-stuff ()
+	    "My settings for message composition."
+	    (set-fill-column 72)
+	    (flyspell-mode)))
+
 ;; cask
 
 (require 'cask "/usr/local/share/emacs/site-lisp/cask/cask.el")
@@ -213,6 +223,11 @@
  ;; If there is more than one, they won't work right.
  )
 
+;; Disable clutter
+(setq inhibit-startup-screen t)
+;;(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; automatically launch emacs server and prodigy/imapnotify
 (server-start)

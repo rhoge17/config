@@ -198,7 +198,7 @@
   (prodigy-define-service
     :name "imapnotify"
     :command "imapnotify"
-    :args (list "-c" (expand-file-name ".shared_config_files/imapnotify.mcgill.js" (getenv "HOME")))
+    :args (list "-c" (expand-file-name "config/imapnotify.mcgill.js" (getenv "HOME")))
     :tags '(email)
     :kill-signal 'sigkill
     :auto-start t))

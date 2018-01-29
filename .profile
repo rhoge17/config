@@ -51,11 +51,13 @@ alias e="$EMACS_PATH/emacsclient -c --alternate-editor=$EMACS_PATH/emacs"
 alias e2="$EMACS_PATH/emacsclient --no-wait --alternate-editor=$EMACS_PATH/emacs"
 alias mbs='mbsync -a ; emacsclient -e \(mu4e-update-index\)'
 alias mbsm='mbsync McGill ; emacsclient -e \(mu4e-update-index\)'
+alias mbsa='mbsync McGill-archive ; emacsclient -e \(mu4e-update-index\)'
 alias mbsi='mbsync McGill-inbox ; emacsclient -e \(mu4e-update-index\)'
 alias mbss='mbsync McGill-sentitems ; emacsclient -e \(mu4e-update-index\)'
 alias mbsd='mbsync McGill-drafts ; emacsclient -e \(mu4e-update-index\)'
 alias mbst='mbsync McGill-deleteditems ; emacsclient -e \(mu4e-update-index\)'
 alias mytest='echo $EDITOR'
+alias frm='frm -n -S | tail -r -n 10'
 
 # SVN stuff
 export SVN_EDITOR=/usr/bin/emacs

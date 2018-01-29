@@ -32,6 +32,24 @@
 (setq org-agenda-files (list "~/org/work.org"
                              "~/org/home.org"))
 
+;; org-mode color theme
+(add-hook `org-mode-hook
+	  (defun my-org-colors ()
+	    "My org-mode colors"
+	    (custom-theme-set-faces 'user `(org-level-1 ((t (:foreground "#01FFFF")))))
+	    (custom-theme-set-faces 'user `(org-level-2 ((t (:foreground "#6BCFAD")))))
+	    (custom-theme-set-faces 'user `(org-todo ((t (:foreground "#FF0000" :bold t)))))
+	    (custom-theme-set-faces 'user `(org-done ((t (:foreground "#9ACD32")))))
+	    (custom-theme-set-faces 'user `(org-special-keyword ((t (:foreground "#E6E703")))))
+	    (custom-theme-set-faces 'user `(org-date ((t (:foreground "#B2AD66")))))
+	    (custom-theme-set-faces 'user `(org-default ((t (:foreground "#B4AF67")))))
+	    (custom-theme-set-faces 'user `(org-agenda-structure ((t (:foreground "#85CBF7")))))
+	    (buffer-face-mode)
+	    ))
+
+;; needed for S-tab to work in org-mode
+(global-set-key [backtab] 'org-shifttab)
+
 ;; automatically open files in correct mode
 (add-to-list 'auto-mode-alist '("\\.org\\'" . org-mode))
 (add-to-list 'auto-mode-alist '("notes.txt" . shell-script-mode))
@@ -39,9 +57,6 @@
 (add-to-list 'auto-mode-alist '(".zpreztorc" . shell-script-mode))
 (add-to-list 'auto-mode-alist '(".generic_profile" . shell-script-mode))
 (add-to-list 'auto-mode-alist '(".mbsyncrc" . shell-script-mode))
-
-;; needed for S-tab to work in org-mode
-(global-set-key [backtab] 'org-shifttab)
 
 ;; mu4e - emacs email client
 ; add the source shipped with mu to load-path

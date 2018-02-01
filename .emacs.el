@@ -217,45 +217,7 @@
 ;; mu4e contexts
 
 (setq mu4e-contexts
-      `( ,(make-mu4e-context
-	   :name "home"
-	   :enter-func (lambda () (mu4e-message "Entering HOME context"))
-	   :leave-func (lambda () (mu4e-message "Leaving HOME context"))
-	   ;; we match based on the contact-fields of the message
-	   :match-func (lambda (msg)
-			 (when msg 
-			   (mu4e-message-contact-field-matches msg 
-							       :to "rickhoge@icloud.com")))
-	   :vars '( ( user-mail-address      . "rickhoge@icloud.com"  )
-		    ( user-full-name         . "Rick Hoge" )
-		    ( mu4e-compose-signature .
-					     (concat
-					      "Rick Hoge\n"
-					      "Montreal, Quebec\n"))
-
-		    ( mu4e-get-mail-command . "/usr/local/bin/mbsync -q iCloud")
-    		    ( mu4e-drafts-folder . "/iCloud/Drafts")
-		    ( mu4e-sent-folder . "/iCloud/Sent Messages")
-		    ( mu4e-sent-folder . "/iCloud/Sent")
-		    ( mu4e-trash-folder . "/iCloud/Deleted Messages")
-		    ( mu4e-refile-folder . "/iCloud/Archive")
-
-		    ( mu4e-maildir-shortcuts .
-					     ( ("/iCloud/Inbox"         . ?i)
-					       ("/iCloud/Archive"       . ?a)
-					       ("/iCloud/Deleted Messages" . ?t)
-					       ("/iCloud/Sent Messages"    . ?s)))
-		    ( mu4e-bookmarks .
-		    		     (
-				      ("maildir:/iCloud/Inbox AND date:today" "Today" ?t)
-				      ("maildir:/iCloud/Inbox AND date:2d..now" "Since yesterday" ?y)
-				      ("maildir:/iCloud/Inbox AND date:3d..now" "Last three days" ?Y)
-				      ("maildir:/iCloud/Inbox AND date:7d..now" "Last 7 days" ?w)
-				      ("maildir:/iCloud/Inbox AND date:14d..now" "Last 14 days" ?W)
-				      )
-				     )
-		    )
-	   )
+      `(
 	 
 	 ,(make-mu4e-context
 	   :name "work"
@@ -294,14 +256,57 @@
 		    
 		    ) ;; end of vars
 	   ) ;; end of context
-	 ))
+
+	,(make-mu4e-context
+	   :name "home"
+	   :enter-func (lambda () (mu4e-message "Entering HOME context"))
+	   :leave-func (lambda () (mu4e-message "Leaving HOME context"))
+	   ;; we match based on the contact-fields of the message
+	   :match-func (lambda (msg)
+			 (when msg 
+			   (mu4e-message-contact-field-matches msg 
+							       :to "rickhoge@icloud.com")))
+	   :vars '( ( user-mail-address      . "rickhoge@icloud.com"  )
+		    ( user-full-name         . "Rick Hoge" )
+		    ( mu4e-compose-signature .
+					     (concat
+					      "Rick Hoge\n"
+					      "Montreal, Quebec\n"))
+
+		    ( mu4e-get-mail-command . "/usr/local/bin/mbsync -q iCloud")
+    		    ( mu4e-drafts-folder . "/iCloud/Drafts")
+		    ( mu4e-sent-folder . "/iCloud/Sent Messages")
+		    ( mu4e-sent-folder . "/iCloud/Sent")
+		    ( mu4e-trash-folder . "/iCloud/Deleted Messages")
+		    ( mu4e-refile-folder . "/iCloud/Archive")
+
+		    ( mu4e-maildir-shortcuts .
+					     ( ("/iCloud/Inbox"         . ?i)
+					       ("/iCloud/Archive"       . ?a)
+					       ("/iCloud/Deleted Messages" . ?t)
+					       ("/iCloud/Sent Messages"    . ?s)))
+		    ( mu4e-bookmarks .
+		    		     (
+				      ("maildir:/iCloud/Inbox AND date:today" "Today" ?t)
+				      ("maildir:/iCloud/Inbox AND date:2d..now" "Since yesterday" ?y)
+				      ("maildir:/iCloud/Inbox AND date:3d..now" "Last three days" ?Y)
+				      ("maildir:/iCloud/Inbox AND date:7d..now" "Last 7 days" ?w)
+				      ("maildir:/iCloud/Inbox AND date:14d..now" "Last 14 days" ?W)
+				      )
+				     )
+		    ) ;; end of vars
+	   ) ;; end of context
+	 
+	 ) ;; end of list
+      ) ;; end of function
 
   ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
   ;; guess or ask the correct context, e.g.
 
   ;; start with the first (default) context; 
   ;; default is to ask-if-none (ask when there's no context yet, and none match)
-  ;; (setq mu4e-context-policy 'pick-first)
+(setq mu4e-context-policy 'pick-first)
+(setq mu4e-compose-policy 'pick-first)
 
 ;;(set-face-foreground 'mu4e-modeline-face "darkblue")
 ;;(set-face-foreground 'mu4e-context-face "purple")

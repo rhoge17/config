@@ -303,6 +303,10 @@
   ;; default is to ask-if-none (ask when there's no context yet, and none match)
   ;; (setq mu4e-context-policy 'pick-first)
 
+;;(set-face-foreground 'mu4e-modeline-face "darkblue")
+;;(set-face-foreground 'mu4e-context-face "purple")
+(set-face-background 'mode-line "#555555")
+
   ;; compose with the current context is no context matches;
   ;; default is to ask 
   ;; (setq mu4e-compose-context-policy nil)

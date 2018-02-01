@@ -81,3 +81,85 @@ Channel McGill-deleteditems
 Channel McGill-sent
 Channel McGill-sentitems
 
+# Home account
+IMAPAccount iCloud
+Host imap.mail.me.com
+User rickhoge
+#Pass 55Bobrow
+Pass taom-xclb-xefu-edhy
+#PassCmd "security find-generic-password -s mbsync -w"
+#PassCmd "gpg2 -q --for-your-eyes-only --no-tty -d ~/.mailpass.gpg"
+#CertificateFile /etc/ssl/certs/ca-certificates.crt
+SSLType IMAPS
+Port 993
+SSLVersions TLSv1.2
+AuthMechs PLAIN
+
+IMAPStore iCloud-remote
+Account iCloud
+
+MaildirStore iCloud-local
+Path ~/Maildir/iCloud/
+Inbox ~/Maildir/iCloud/Inbox
+
+# Inbox
+
+Channel iCloud-inbox
+Master :iCloud-remote:
+Slave :iCloud-local:
+Patterns "INBOX"
+
+# Archive
+
+Channel iCloud-archive
+Master :iCloud-remote:"Archive"
+Slave :iCloud-local:"Archive"
+Create Both
+Expunge Both
+SyncState *
+
+# Drafts
+
+Channel iCloud-drafts
+Master :iCloud-remote:"Drafts"
+Slave :iCloud-local:"Drafts"
+Create Both
+Expunge Both
+SyncState *
+
+# Trash
+
+Channel iCloud-deletedmessages
+Master :iCloud-remote:"Deleted Messages"
+Slave :iCloud-local:"Deleted Messages"
+Create Both
+Expunge Both
+SyncState *
+
+# Sent Messages
+
+Channel iCloud-sentmessages
+Master :iCloud-remote:"Sent Messages"
+Slave :iCloud-local:"Sent Messages"
+Create Both
+Expunge Both
+SyncState *
+
+# Sent
+
+Channel iCloud-sent
+Master :iCloud-remote:"Sent"
+Slave :iCloud-local:"Sent"
+Create Both
+Expunge Both
+SyncState *
+
+# Group
+
+Group iCloud
+Channel iCloud-inbox
+Channel iCloud-archive
+Channel iCloud-drafts
+Channel iCloud-deletedmessages
+Channel iCloud-sentmessages
+

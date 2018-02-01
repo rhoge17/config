@@ -73,7 +73,6 @@
 (setq mu4e-maildir "/Users/rhoge/Maildir")
 
 ; tell mu4e how to sync email
-(setq mu4e-get-mail-command "/usr/local/bin/mbsync -q McGill")
 (setq mu4e-update-interval 600) ;; Update interval in seconds (nil for no update)
 
 ; to avoid duplicate UID errors
@@ -82,38 +81,8 @@
 ; tell mu4e to use w3m for html rendering
 (setq mu4e-html2text-command "/usr/local/bin/w3m -T text/html")
 
-;; mu4e bookmarks
-
-(setq mu4e-bookmarks
-      `( ,(make-mu4e-bookmark
-	   :name  "Today"
-	   :query "maildir:/McGill/Inbox AND date:today"
-	   :key ?t)
-	 ,(make-mu4e-bookmark
-	   :name "Since yesterday"
-	   :query "maildir:/McGill/Inbox AND date:2d..now"
-	   :key ?y)
-	 ,(make-mu4e-bookmark
-	   :name "Last three days"
-	   :query "maildir:/McGill/Inbox AND date:3d..now"
-	   :key ?Y)
-	 ,(make-mu4e-bookmark
-	   :name "Last 7 days"
-	   :query "maildir:/McGill/inbox AND date:7d..now"
-	   :key ?w)
-	 ,(make-mu4e-bookmark
-	   :name "Last 14 days"
-	   :query "maildir:/McGill/inbox AND date:14d..now"
-	   :key ?W)))
-
-; mu4e requires to specify drafts, sent, and trash dirs
-; a smarter configuration allows to select directories according to the account (see mu4e page)
-(setq mu4e-drafts-folder "/McGill/Drafts")
-(setq mu4e-sent-folder "/McGill/Sent Items")
-(setq mu4e-trash-folder "/McGill/Deleted Items")
-(setq mu4e-refile-folder "/McGill/Archive")
-
 (add-to-list 'mu4e-user-mail-address-list "rick.hoge@mcgill.ca") 
+(add-to-list 'mu4e-user-mail-address-list "rickhoge@icloud.com") 
 
 ;; various behaviours
 (setq mu4e-sent-messages-behavior 'sent)
@@ -168,19 +137,16 @@
 
 ;; general emacs mail settings; used when composing e-mail
 ;; the non-mu4e-* stuff is inherited from emacs/message-mode
-(setq mu4e-reply-to-address "rick.hoge@mcgill.ca"
-      user-mail-address "rick.hoge@mcgill.ca"
-      user-full-name  "Rick Hoge"
-      smtpmail-smtp-service 587)
-(setq mu4e-compose-signature
-   "\nRick Hoge\nMcConnell Brain Imaging Centre\nMontreal Neurological Institute\nMcGill University")
+;; (setq mu4e-reply-to-address "rick.hoge@mcgill.ca"
+;;       user-mail-address "rick.hoge@mcgill.ca"
+;;       user-full-name  "Rick Hoge"
+;;       smtpmail-smtp-service 587)
+;; (setq mu4e-compose-signature
+;;    "\nRick Hoge\nMcConnell Brain Imaging Centre\nMontreal Neurological Institute\nMcGill University")
+
+(setq smtpmail-smtp-service 587)
 
 ;; Keyboard Shortcuts
-(setq mu4e-maildir-shortcuts
-  '( ("/McGill/Inbox"         . ?i)
-     ("/McGill/Archive"       . ?a)
-     ("/McGill/Deleted Items" . ?t)
-     ("/McGill/Sent Items"    . ?s)))
 
 ;; To deal with Office 365 Trash issues, search for "dtrash" in mu4e-mark.el
 ;; (mu4e~mark-check-target target) "+T-N")) and remove the "+T"
@@ -211,9 +177,16 @@
           :name 'email
           :ready-message "Checking Email using IMAP IDLE. Ctrl-C to shutdown.")
   (prodigy-define-service
-    :name "imapnotify"
+    :name "imapnotify McGill"
     :command "imapnotify"
     :args (list "-c" (expand-file-name "config/imapnotify.mcgill.js" (getenv "HOME")))
+    :tags '(email)
+    :kill-signal 'sigkill
+    :auto-start t)
+  (prodigy-define-service
+    :name "imapnotify iCloud"
+    :command "imapnotify"
+    :args (list "-c" (expand-file-name "config/imapnotify.icloud.js" (getenv "HOME")))
     :tags '(email)
     :kill-signal 'sigkill
     :auto-start t))
@@ -240,6 +213,99 @@
 	 (:flags         .   6)
 	 (:from          .  27)
 	 (:subject       .  nil))) ;; alternatively, use :thread-subject
+
+;; mu4e contexts
+
+(setq mu4e-contexts
+      `( ,(make-mu4e-context
+	   :name "home"
+	   :enter-func (lambda () (mu4e-message "Entering HOME context"))
+	   :leave-func (lambda () (mu4e-message "Leaving HOME context"))
+	   ;; we match based on the contact-fields of the message
+	   :match-func (lambda (msg)
+			 (when msg 
+			   (mu4e-message-contact-field-matches msg 
+							       :to "rickhoge@icloud.com")))
+	   :vars '( ( user-mail-address      . "rickhoge@icloud.com"  )
+		    ( user-full-name         . "Rick Hoge" )
+		    ( mu4e-compose-signature .
+					     (concat
+					      "Rick Hoge\n"
+					      "Montreal, Quebec\n"))
+
+		    ( mu4e-get-mail-command . "/usr/local/bin/mbsync -q iCloud")
+    		    ( mu4e-drafts-folder . "/iCloud/Drafts")
+		    ( mu4e-sent-folder . "/iCloud/Sent Messages")
+		    ( mu4e-sent-folder . "/iCloud/Sent")
+		    ( mu4e-trash-folder . "/iCloud/Deleted Messages")
+		    ( mu4e-refile-folder . "/iCloud/Archive")
+
+		    ( mu4e-maildir-shortcuts .
+					     ( ("/iCloud/Inbox"         . ?i)
+					       ("/iCloud/Archive"       . ?a)
+					       ("/iCloud/Deleted Messages" . ?t)
+					       ("/iCloud/Sent Messages"    . ?s)))
+		    ( mu4e-bookmarks .
+		    		     (
+				      ("maildir:/iCloud/Inbox AND date:today" "Today" ?t)
+				      ("maildir:/iCloud/Inbox AND date:2d..now" "Since yesterday" ?y)
+				      ("maildir:/iCloud/Inbox AND date:3d..now" "Last three days" ?Y)
+				      ("maildir:/iCloud/Inbox AND date:7d..now" "Last 7 days" ?w)
+				      ("maildir:/iCloud/Inbox AND date:14d..now" "Last 14 days" ?W)
+				      )
+				     )
+		    )
+	   )
+	 
+	 ,(make-mu4e-context
+	   :name "work"
+	   :enter-func (lambda () (mu4e-message "Switch to the WORK context"))
+	   ;; no leave-func
+	   ;; we match based on the contact-fields of the message
+	   :match-func (lambda (msg)
+			 (when msg 
+			   (mu4e-message-contact-field-matches msg 
+							       :to "rick.hoge@mcgill.ca")))
+	   :vars '( ( user-mail-address       . "rick.hoge@mcgill.ca" )
+		    ( user-full-name          . "Rick Hoge" )
+		    ( mu4e-compose-signature  .
+					      (concat
+					       "Rick Hoge\n"
+					       "McGill University, Dept. of Neurology and Neurosurgery\n"))
+		    ( mu4e-get-mail-command . "/usr/local/bin/mbsync -q McGill")
+		    ( mu4e-drafts-folder . "/McGill/Drafts")
+		    ( mu4e-sent-folder . "/McGill/Sent Items")
+		    ( mu4e-trash-folder . "/McGill/Deleted Items")
+		    ( mu4e-refile-folder . "/McGill/Archive")
+		    ( mu4e-maildir-shortcuts .
+					     ( ("/McGill/Inbox"         . ?i)
+					       ("/McGill/Archive"       . ?a)
+					       ("/McGill/Deleted Items" . ?t)
+					       ("/McGill/Sent Items"    . ?s)))
+		    ( mu4e-bookmarks .
+		    		     (
+				      ("maildir:/McGill/Inbox AND date:today" "Today" ?t)
+				      ("maildir:/McGill/Inbox AND date:2d..now" "Since yesterday" ?y)
+				      ("maildir:/McGill/Inbox AND date:3d..now" "Last three days" ?Y)
+				      ("maildir:/McGill/Inbox AND date:7d..now" "Last 7 days" ?w)
+				      ("maildir:/McGill/Inbox AND date:14d..now" "Last 14 days" ?W)
+				      )
+				     )
+		    
+		    ) ;; end of vars
+	   ) ;; end of context
+	 ))
+
+  ;; set `mu4e-context-policy` and `mu4e-compose-policy` to tweak when mu4e should
+  ;; guess or ask the correct context, e.g.
+
+  ;; start with the first (default) context; 
+  ;; default is to ask-if-none (ask when there's no context yet, and none match)
+  ;; (setq mu4e-context-policy 'pick-first)
+
+  ;; compose with the current context is no context matches;
+  ;; default is to ask 
+  ;; (setq mu4e-compose-context-policy nil)
 
 (custom-set-variables
  ;; custom-set-variables was added by Custom.

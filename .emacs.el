@@ -330,4 +330,6 @@
 (server-start)
 (prodigy)
 (prodigy-start)
+(prodigy-next)
+(prodigy-start)
 (delete-other-windows)

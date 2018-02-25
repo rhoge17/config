@@ -232,8 +232,8 @@
 		    ( user-full-name          . "Rick Hoge" )
 		    ( mu4e-compose-signature  .
 					      (concat
-					       "Rick Hoge\n"
-					       "McGill University, Dept. of Neurology and Neurosurgery\n"))
+					       "Rick Hoge, PhD\nDirector, MRI Program\nMcConnell Brain Imaging Centre, Montreal Neurological Institute\nAssociate Professor and Killam Scholar, Dept. of Neurology & Neurosurgery\nAssociate Member, Dept. of Biomedical Engineering\nMcGill University\nrick.hoge@mcgill.ca\n514-398-1929"))
+		    
 		    ( mu4e-get-mail-command . "/usr/local/bin/mbsync -q McGill")
 		    ( mu4e-drafts-folder . "/McGill/Drafts")
 		    ( mu4e-sent-folder . "/McGill/Sent Items")
@@ -306,7 +306,25 @@
   ;; start with the first (default) context; 
   ;; default is to ask-if-none (ask when there's no context yet, and none match)
 (setq mu4e-context-policy 'pick-first)
-(setq mu4e-compose-policy 'pick-first)
+(setq mu4e-compose-context-policy 'pick-first)
+
+;; use DIRED to attach files
+(require 'gnus-dired)
+;; make the `gnus-dired-mail-buffers' function also work on
+;; message-mode derived modes, such as mu4e-compose-mode
+(defun gnus-dired-mail-buffers ()
+  "Return a list of active message buffers."
+  (let (buffers)
+    (save-current-buffer
+      (dolist (buffer (buffer-list t))
+        (set-buffer buffer)
+        (when (and (derived-mode-p 'message-mode)
+                (null message-sent-message-via))
+          (push (buffer-name buffer) buffers))))
+    (nreverse buffers)))
+
+(setq gnus-dired-mail-mode 'mu4e-user-agent)
+(add-hook 'dired-mode-hook 'turn-on-gnus-dired-mode)
 
 ;;(set-face-foreground 'mu4e-modeline-face "darkblue")
 ;;(set-face-foreground 'mu4e-context-face "purple")

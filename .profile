@@ -49,7 +49,8 @@ alias lp='lp -d HP_Color_LaserJet_3600'
 alias mu4e="$EMACS_PATH/emacsclient -e \(mu4e\) --alternate-editor=$EMACS_PATH/emacs"
 alias e="$EMACS_PATH/emacsclient -c --alternate-editor=$EMACS_PATH/emacs"
 alias e2="$EMACS_PATH/emacsclient --no-wait --alternate-editor=$EMACS_PATH/emacs"
-alias mbs='mbsync -a ; emacsclient -e \(mu4e-update-index\)'
+#alias mbs='mbsync -a ; emacsclient -e \(mu4e-update-index\)'
+alias mbs='mbsync -a ; mu index'
 alias mbsm='mbsync McGill ; emacsclient -e \(mu4e-update-index\)'
 alias mbsa='mbsync McGill-archive ; emacsclient -e \(mu4e-update-index\)'
 alias mbsi='mbsync McGill-inbox ; emacsclient -e \(mu4e-update-index\)'

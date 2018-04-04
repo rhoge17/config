@@ -167,6 +167,7 @@
 (cask-initialize)
 
 ;;(require 'use-package "/Users/rhoge/Downloads/use-package-master/use-package.el")
+(add-to-list 'load-path "/usr/local/share/emacs/site-lisp/use-package/")
 (require 'use-package "/usr/local/share/emacs/site-lisp/use-package/use-package.el")
 
 (require 'prodigy "/Users/rhoge/Downloads/prodigy.el-master/prodigy.el")
@@ -179,14 +180,14 @@
   (prodigy-define-service
     :name "imapnotify McGill"
     :command "imapnotify"
-    :args (list "-c" (expand-file-name "config/imapnotify.mcgill.js" (getenv "HOME")))
+    :args (list "-c" (expand-file-name "~/config/imapnotify.mcgill.js" (getenv "HOME")))
     :tags '(email)
     :kill-signal 'sigkill
     :auto-start t)
   (prodigy-define-service
     :name "imapnotify iCloud"
     :command "imapnotify"
-    :args (list "-c" (expand-file-name "config/imapnotify.icloud.js" (getenv "HOME")))
+    :args (list "-c" (expand-file-name "~/config/imapnotify.icloud.js" (getenv "HOME")))
     :tags '(email)
     :kill-signal 'sigkill
     :auto-start t))
@@ -349,9 +350,9 @@
 
 ;; Disable clutter
 (setq inhibit-startup-screen t)
-(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
-(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
-(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
+;;(if (fboundp 'menu-bar-mode) (menu-bar-mode -1))
+;;(if (fboundp 'tool-bar-mode) (tool-bar-mode -1))
+;;(if (fboundp 'scroll-bar-mode) (scroll-bar-mode -1))
 
 ;; automatically launch emacs server and prodigy/imapnotify
 (server-start)
